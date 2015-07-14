@@ -1,0 +1,29 @@
+{
+  "name": "bd-router",
+  "version": "0.1.0",
+  "description": "bd router middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdjs/bd-router.git"
+  },
+  "keywords": [
+    "bd",
+    "router",
+    "bd-router"
+  ],
+  "author": "mdemo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bdjs/bd-router/issues"
+  },
+  "homepage": "https://github.com/bdjs/bd-router#readme",
+  "dependencies": {
+    "bd-logger": "^0.1.0",
+    "koa-compose": "^2.3.0",
+    "koa-router": "^5.1.2"
+  }
+}
