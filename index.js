@@ -20,7 +20,7 @@ module.exports = function (apps) {
     var routesDirname = path.join(dirname, 'routes');
     if (fs.existsSync(routesDirname)) {
       if (!loggers[key]) {
-        loggers[key] = logger(key);
+        loggers[key] = logger({app: key});
       }      
       var routes = fs.readdirSync(routesDirname);
       routes.map(function (file) {
