@@ -14,7 +14,7 @@ var loggers = {};
 module.exports = function(apps, configs) {
   apps = apps || {};
   configs = configs || {};
-  loggerConfig = configs.logger || {};
+  var loggerConfig = configs.logger || {};
   var keys = Object.keys(apps);
   keys.map(function(key) {
     var dirname = apps[key];
