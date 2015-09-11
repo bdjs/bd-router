@@ -11,9 +11,10 @@ var assign = require('object-assign');
 var routers = [];
 var loggers = {};
 
-module.exports = function(apps, loggerConfig) {
+module.exports = function(apps, configs) {
   apps = apps || {};
-  loggerConfig = loggerConfig || {};
+  configs = configs || {};
+  loggerConfig = configs.logger || {};
   var keys = Object.keys(apps);
   keys.map(function(key) {
     var dirname = apps[key];
@@ -35,7 +36,7 @@ module.exports = function(apps, loggerConfig) {
         }
         var route = require(path.join(routesDirname, file));
         if (typeof route == 'function') {
-          route(router, loggers[key]);
+          route(router, loggers[key], configs);
         }
       });
     }
