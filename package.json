@@ -1,11 +1,9 @@
 {
   "name": "bd-router",
-  "version": "0.3.0",
+  "version": "2.0.0",
   "description": "bd router middleware",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bdjs/bd-router.git"
@@ -15,24 +13,23 @@
     "router",
     "bd-router"
   ],
-  "author": "mdemo",
+  "author": "blued-fe",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bdjs/bd-router/issues"
   },
   "homepage": "https://github.com/bdjs/bd-router#readme",
   "dependencies": {
-    "bd-logger": "^0.2.0",
-    "koa-compose": "^2.3.0",
-    "koa-router": "^5.1.2",
-    "object-assign": "^3.0.0"
+    "bd-logger": "^2.0.0",
+    "koa-compose": "^4.0.0",
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.15.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1"
   }
 }
