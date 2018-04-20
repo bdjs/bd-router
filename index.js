@@ -56,7 +56,7 @@ function loadRouter ({dirname, prefix, logger, configs}) {
     if (fileStats.isDirectory()) {
       routers.push(loadRouter({
         dirname,
-        prefix: path.join('/', file),
+        prefix: path.join(prefix, '/', file),
         logger,
         configs
       }))
