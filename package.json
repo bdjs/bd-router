@@ -19,6 +19,9 @@
     "url": "https://github.com/bdjs/bd-router/issues"
   },
   "homepage": "https://github.com/bdjs/bd-router#readme",
+  "engines": {
+    "node": ">= 8.0.0"
+  },
   "dependencies": {
     "bd-logger": "^2.0.0",
     "koa-compose": "^4.0.0",

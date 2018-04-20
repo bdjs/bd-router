@@ -26,7 +26,7 @@ function loadRouterFolder (configs = {}, apps) {
 
       routers.push(loadRouter({
         dirname,
-        prefix: '/',
+        prefix: '',
         logger: loggers[key],
         configs
       }))
