@@ -1,4 +1,4 @@
-'use strict'
+/* eslint-disable import/no-dynamic-require */
 
 const Router = require('koa-router')
 const compose = require('koa-compose')
@@ -6,51 +6,55 @@ const logger = require('bd-logger')
 const path = require('path')
 const fs = require('fs')
 
-let routers = []
-let loggers = {}
+const routers = []
+const loggers = {}
 
 module.exports = loadRouterFolder
 
 // 获取所有router文件夹
 function loadRouterFolder (configs = {}, apps) {
-  let loggerConfig = configs.logger || {}
-  apps && Object.entries(apps).forEach(([key, dirname]) => {
-    let routesDirname = path.join(dirname, 'routes')
-    if (fs.existsSync(routesDirname)) {
-      if (!loggers[key]) {
-        loggers[key] = logger({
-          ...loggerConfig,
-          app: key
-        })
-      }
+  const loggerConfig = configs.logger || {}
+  if (apps) {
+    Object.entries(apps).forEach(([key, dirname]) => {
+      const routesDirname = path.join(dirname, 'routes')
+      if (fs.existsSync(routesDirname)) {
+        if (!loggers[key]) {
+          loggers[key] = logger({
+            ...loggerConfig,
+            app: key,
+          })
+        }
 
-      routers.push(loadRouter({
-        dirname,
-        prefix: '',
-        logger: loggers[key],
-        configs
-      }))
-    }
-  })
+        routers.push(loadRouter({
+          dirname,
+          prefix: '',
+          logger: loggers[key],
+          configs,
+        }))
+      }
+    })
+  }
   return compose(routers)
 }
 
-function loadRouter ({dirname, prefix, logger, configs}) {
-  let routers = []
-  let routesDirname = path.join(dirname, 'routes', prefix) // 拼接router目录
-  let routerName = dirname.match(/\/[^/]+$/)[0] // 取出path中最后边的一段，也就是app name
+function loadRouter ({ dirname, prefix, logger, configs }) {
+  const routers = []
+  // 拼接router目录
+  const routesDirname = path.join(dirname, 'routes', prefix)
+  // 取出path中最后边的一段，也就是app name
+  const routerName = dirname.match(/\/[^/]+$/)[0]
 
   // `index`默认为首页，去除`index`
   // `prefix`用于`routes`文件夹中如果还存在子目录的情况。会添加对应的`path`
-  let router = new Router({
-    prefix: (routerName === '/index' ? '' : routerName) + prefix
+  const router = new Router({
+    prefix: (routerName === '/index' ? '' : routerName) + prefix,
   })
 
-  let routes = fs.readdirSync(routesDirname)
+  const routes = fs.readdirSync(routesDirname)
   routes.forEach(file => {
     if (file[0] === '.') return
-    let filePath = path.join(routesDirname, file)
-    let fileStats = fs.statSync(filePath)
+    const filePath = path.join(routesDirname, file)
+    const fileStats = fs.statSync(filePath)
 
     // 如果是文件夹，
     if (fileStats.isDirectory()) {
@@ -58,11 +62,11 @@ function loadRouter ({dirname, prefix, logger, configs}) {
         dirname,
         prefix: path.join(prefix, '/', file),
         logger,
-        configs
+        configs,
       }))
     } else {
       // 普通文件直接执行
-      let route = require(filePath)
+      const route = require(filePath)
       if (typeof route === 'function') {
         route(router, logger, configs)
       }
